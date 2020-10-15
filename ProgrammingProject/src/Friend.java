@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 
 public class Friend {
 	protected String id;
+	
+
 	protected String name;
 	protected String lastname;
 	protected String birthDate;
@@ -29,5 +32,97 @@ public class Friend {
 		this.workPlaces = workPlaces;
 		this.films = films;
 		this.groupCode = groupCode;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getBirthPlace() {
+		return birthPlace;
+	}
+
+	public void setBirthPlace(String birthPlace) {
+		this.birthPlace = birthPlace;
+	}
+
+	public String getHome() {
+		return home;
+	}
+
+	public void setHome(String home) {
+		this.home = home;
+	}
+
+	public String getStudiedAt() {
+		return studiedAt;
+	}
+
+	public void setStudiedAt(String studiedAt) {
+		this.studiedAt = studiedAt;
+	}
+
+	public String getWorkPlaces() {
+		return workPlaces;
+	}
+
+	public void setWorkPlaces(String workPlaces) {
+		this.workPlaces = workPlaces;
+	}
+
+	public String getFilms() {
+		return films;
+	}
+
+	public void setFilms(String films) {
+		this.films = films;
+	}
+
+	public String getGroupCode() {
+		return groupCode;
+	}
+
+	public void setGroupCode(String groupCode) {
+		this.groupCode = groupCode;
+	}
+	
+	public void print() {
+		System.out.println("User's Id: " + id + ", Name: " + name + ", Lastname: " + lastname + ", Birthdate: " + birthDate + ", Gender: " + gender + ", Birthplace: " + birthPlace + ", Home: " + home + ", Studied at: " + studiedAt + ", Work places: " + workPlaces + ", Films: " + films + ", Groupcode: " + groupCode);
 	}
 }
