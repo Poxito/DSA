@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 
-public class Friend {
+public class Friend extends Object{
 	protected String id;
-	
-
 	protected String name;
 	protected String lastname;
 	protected String birthDate;
@@ -122,7 +120,8 @@ public class Friend {
 		this.groupCode = groupCode;
 	}
 	
-	public void print() {
-		System.out.println("User's Id: " + id + ", Name: " + name + ", Lastname: " + lastname + ", Birthdate: " + birthDate + ", Gender: " + gender + ", Birthplace: " + birthPlace + ", Home: " + home + ", Studied at: " + studiedAt + ", Work places: " + workPlaces + ", Films: " + films + ", Groupcode: " + groupCode);
+	public String print() {
+		String in = "User's Id: " + id + ", Name: " + name + ", Lastname: " + lastname + ", Birthdate: " + birthDate + ", Gender: " + gender + ", Birthplace: " + birthPlace + ", Home: " + home + ", Studied at: " + studiedAt + ", Work places: " + workPlaces + ", Films: " + films + ", Groupcode: " + groupCode;
+		return in;
 	}
 }

@@ -3,20 +3,18 @@ import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.CharBuffer;
 import java.io.BufferedReader;
 import java.io.File;
 
 public class Network {
 
-	ArrayList<Friend> ourNetwork = new ArrayList();
+	ArrayList<Object> ourNetwork = new ArrayList();
 	
 	public void read_info() throws IOException {
 		String line = "";  
 		String splitBy = ",";
-	
-		//creating File instance to reference text file in Java
-        File text = new File("C:/temp/test.txt");
      
         //Creating Scanner instnace to read File in Java
         Scanner scnr = new Scanner(new File("C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\ProgrammingProject\\peopleG612054.txt"));
@@ -31,11 +29,39 @@ public class Network {
 		}
 	}
 	
-	public void printData() {
-		for(Friend user : ourNetwork) {
-			user.print();
+	public void printData() throws FileNotFoundException {
+		String writePath = "C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\ProgrammingProject\\NetworkInformation.txt";
+		File wrname = new File (writePath);
+		PrintWriter outFile = new PrintWriter (wrname);
+		
+		for(Object user : ourNetwork) {
+			if(user instanceof Friend) {
+				outFile.println(((Friend) user).print());
+			}else {
+				outFile.println(((Relationships) user).print());
+			}
+			
+		}
+		outFile.close();
+	}
+	
+	public void load_relationships() throws IOException {
+		String line = "";  
+		String splitBy = ",";
+     
+        //Creating Scanner 
+        Scanner scnr = new Scanner(new File("C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\ProgrammingProject\\friendsG612054.txt"));
+        
+        line = scnr.nextLine();
+        
+		while (scnr.hasNextLine()) {  
+			line = scnr.nextLine();
+			String[] rela = line.split(splitBy); // use comma as separator
+			Relationships userXuser = new Relationships(rela[0], rela[1]);
+			ourNetwork.add(userXuser);
 		}
 	}
+	
 	
 	public static void main(String args[]) {
 		  
@@ -46,7 +72,7 @@ public class Network {
 			System.out.println("1. Load people into the Instagramos");
 			System.out.println("2. Load the relatioships between the people");
 			System.out.println("3. Print out the information of the people");
-			System.out.println("4. Search for any data about the person you wanna know");
+			System.out.println("4. Search for any data about the person you wanna know, update that data if you want");
 			
 			int number;
 			Scanner keyboard = new Scanner(System.in);
@@ -59,7 +85,7 @@ public class Network {
 					Instagramoak.read_info();
 					break;
 				case 2:
-					//metodos de la clase Relationships
+					Instagramoak.load_relationships();
 					break;
 				case 3:
 					Instagramoak.printData();
@@ -68,6 +94,7 @@ public class Network {
 					//metodos de la clase Search
 					break;
 				case 5:
+					number = -1;
 					//metodos de la clase LogOut
 					break;
 				default:	
