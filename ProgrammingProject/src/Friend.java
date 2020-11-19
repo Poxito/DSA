@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.lang.Comparable;
 
-public class Friend extends Object{
+public class Friend extends Object implements Comparable{
 	protected String id;
 	protected String name;
 	protected String lastname;
@@ -123,5 +124,35 @@ public class Friend extends Object{
 	public String print() {
 		String in = "User's Id: " + id + ", Name: " + name + ", Lastname: " + lastname + ", Birthdate: " + birthDate + ", Gender: " + gender + ", Birthplace: " + birthPlace + ", Home: " + home + ", Studied at: " + studiedAt + ", Work places: " + workPlaces + ", Films: " + films + ", Groupcode: " + groupCode;
 		return in;
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		Friend f1 = (Friend) o;
+		int ascii1 = this.getBirthPlace().charAt(0);
+		int ascii2 = f1.getBirthPlace().charAt(0);
+		if(ascii1 < ascii2) {
+			return -1;
+		}else if(ascii1 == ascii2) {
+			int ascii3 = this.getLastname().charAt(0);
+			int ascii4 = f1.getLastname().charAt(0);
+			if(ascii3 < ascii4) {
+				return -1;
+			}else if(ascii3 == ascii4) {
+				int ascii5 = this.getName().charAt(0);
+				int ascii6 = f1.getName().charAt(0);
+				if(ascii5 < ascii6) {
+					return -1;
+				}else if(ascii5 == ascii6) {
+					return 0;
+				}else {
+					return 1;
+				}
+			}else {
+				return 1;
+			}
+		}else {
+			return 1;
+		}
 	}
 }
