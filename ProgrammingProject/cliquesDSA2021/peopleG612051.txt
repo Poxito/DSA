@@ -1,4 +1,3 @@
-idperson,name,lastname,birthdate,gender,birthplace,home,studiedat,workplaces,films,groupcode
 AnderPool,Ander,Garcia,2-5-2000,male,Donostia,Hernai,Urumea;Salesianos,Santa Monica,Deadpool,G612051
 mikel10,Mikel,Martinez,10-07-1999,male,Donostia,Eibar,Elgoibar,La Salle,Donostia,G612051
 marti15,Martin,Gonzalez,18-12-1998,male,Zumarraga,Legazpi,Art Faculty,Bilbo,Transporter,G612051

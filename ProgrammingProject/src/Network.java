@@ -20,16 +20,21 @@ public class Network {
 		friendStack = new Stack<Friend>();
 	}
 	
-	public ArrayList<Object> getOurNetwork() {
+	public static ArrayList<Object> getOurNetwork() {
 		return ourNetwork;
 	}
 	
+	/**
+	 * 
+	 * @param path
+	 * @throws IOException
+	 */
 	public void read_info(String path) throws IOException {
 		String line = "";  
 		String splitBy = ",";
      
         //Creating Scanner instance to read File in Java
-        Scanner scnr = new Scanner(new File("C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\ProgrammingProject\\cliquesDSA2021\\" + path));//"C:\Users\Poxito\Desktop\2. Kurtsoa\DSA\ProgrammingProject\cliquesDSA2021\" +
+        Scanner scnr = new Scanner(new File("C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\ProgrammingProject\\cliquesDSA2021\\" + path));//"C:\Users\Poxito\Desktop\2. Kurtsoa\DSA\ProgrammingProject\cliquesDSA2021\peopleG612054.txt" +
         
 		while (scnr.hasNextLine()) {  
 			line = scnr.nextLine();
@@ -40,8 +45,13 @@ public class Network {
 		scnr.close();
 	}
 	
+	/**
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	public void printData() throws FileNotFoundException {
 		String writePath = "C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\ProgrammingProject\\NetworkInformation1.txt";
+		
 		File wrname = new File (writePath);
 		PrintWriter outFile = new PrintWriter (wrname);
 		
@@ -55,12 +65,17 @@ public class Network {
 		outFile.close();
 	}
 	
+	/**
+	 * 
+	 * @param path
+	 * @throws IOException
+	 */
 	public void load_relationships(String path) throws IOException {
 		String line = "";  
 		String splitBy = ",";
      
         //Creating Scanner 
-        Scanner scnr = new Scanner(new File("C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\ProgrammingProject\\cliquesDSA2021\\" + path));
+		Scanner scnr = new Scanner(new File("C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\ProgrammingProject\\cliquesDSA2021\\" + path));
         
         line = scnr.nextLine();
         
@@ -73,6 +88,12 @@ public class Network {
 		scnr.close();
 	}
 	
+	/**
+	 * 
+	 * @param surname
+	 * @param press
+	 * @throws FileNotFoundException
+	 */
 	public void printFriends(String surname, int press) throws FileNotFoundException {
 		
 		Friend f1;
@@ -80,11 +101,8 @@ public class Network {
         
         for(int i = 0; i < ourNetwork.size(); i++) {
             if(ourNetwork.get(i) instanceof Friend) {
-                if(((Friend) ourNetwork.get(i)).getLastname().equals(surname)) 
-                    found = true;
-                if(found) {
-                	friendStack.push((Friend) ourNetwork.get(i));
-                	found = false;
+                if(((Friend) ourNetwork.get(i)).getLastname().equals(surname)) {
+                    friendStack.push((Friend) ourNetwork.get(i));found = false;
                 }
             }
         }
@@ -115,6 +133,10 @@ public class Network {
         }outFile.close();
     }
 	
+	/**
+	 * 
+	 * @param city
+	 */
 	public void cityPeople(String city) {
 		
 		for(int i=0; i < ourNetwork.size(); i++) {
@@ -127,30 +149,38 @@ public class Network {
 		}		
 	}
 	
-	public void yearsPeople(String date1, String date2) {
+	/**
+	 * 
+	 * @param year1
+	 * @param year2
+	 */
+	public void yearsPeople(int year1, int year2) {
+		//the first year has to be the oldest year
 		ArrayList<Friend> friendList = new ArrayList<Friend>();
-		int year1, year2;
-		String[] years = date1.split("-");
-		year1 = Integer.parseInt(years[2]);
-		years = date2.split("-");
-		year2 = Integer.parseInt(years[2]);
+		String[] userYear;
 		
 		for(int i =  0; i < ourNetwork.size(); i++) {
 			if(ourNetwork.get(i) instanceof Friend) {
-				years = ((Friend) ourNetwork.get(i)).getBirthDate().split("-");
-				if(year1 < year2) {
-					if(Integer.parseInt(years[2]) > year1 && Integer.parseInt(years[2]) < year2) {
-						friendList.add((Friend) ourNetwork.get(i));
-					}
+				userYear = ((Friend) ourNetwork.get(i)).getBirthDate().split("-");
+				if(Integer.parseInt(userYear[2]) > year1 && Integer.parseInt(userYear[2]) < year2) {
+					friendList.add((Friend) ourNetwork.get(i));
 				}
 			}
 		}
 		Collections.sort(friendList);
 		for(Friend f : friendList) {
-			System.out.println(f.getName() + f.getLastname() + " was born in " + f.getBirthDate());
+			System.out.println(f.getName() + " " + f.getLastname() + " was born in " + f.getBirthDate());
 		}
 	}
 	
+	/**
+	 *  recover the values of the 
+	 *  attributes name, surname, birthplace and studiedat of the people on the network 
+	 *  whose birthplace matches the hometown of the people who are described in 
+	 *  residential.txt. People whose birthplace/hometown is unknown do not affect the 
+	 *  result of this operation.
+	 * @throws IOException
+	 */
 	public void loadResidential() throws IOException {
 		String line = "";  
 		Friend f1;
@@ -182,6 +212,10 @@ public class Network {
         }
 	}
 	
+	/**
+	 * This method prints in console the different classes. A class is a group of users that like exactly the 
+	 * same films.
+	 */
 	public void usersIntoClasses() {
 		String profile = "";
 		ArrayList<String> allProfiles = new ArrayList<String>();
@@ -196,15 +230,19 @@ public class Network {
 					allProfiles.add(profile);
 					classes.add(((Friend) ourNetwork.get(i)).getName() + " " + ((Friend) ourNetwork.get(i)).getLastname());
 				}else {
-					String apdatedClass = classes.get(allProfiles.indexOf(profile));
-					classes.set(allProfiles.indexOf(profile), apdatedClass + ", " + ((Friend) ourNetwork.get(i)).getName() + " " + ((Friend) ourNetwork.get(i)).getLastname());
+					String adaptedClass = classes.get(allProfiles.indexOf(profile));
+					classes.set(allProfiles.indexOf(profile), adaptedClass + ", " + ((Friend) ourNetwork.get(i)).getName() + " " + ((Friend) ourNetwork.get(i)).getLastname());
 				}
 			}
 		}
 		for(int i=0; i<classes.size(); i++) {
-			System.out.println(classes.get(i));
+			System.out.println("The films that the user like: " + allProfiles.get(i));
+			System.out.println("The users that are into the class: " + classes.get(i));
 		}
 	}
+	
+	
+	
 	
 	public static void main(String args[]) {
 		  
@@ -216,7 +254,8 @@ public class Network {
 			System.out.println("2. Load the relatioships between the people");
 			System.out.println("3. Print out the information of the people");
 			System.out.println("4. Search for any data about the person you wanna know, update that data if you want");
-			
+			System.out.println("5. Search for the shortest or largest chain");
+			System.out.println("Enter -1 if you want to log out");
 			int number;
 			Scanner keyboard = new Scanner(System.in);
 			number = keyboard.nextInt();
@@ -261,9 +300,9 @@ public class Network {
 						break;
 					case 3 :
 						//8
-						System.out.println("Enter two dates");
-						String date1 = keyboard.next();
-						String date2 = keyboard.next();
+						System.out.println("Enter two years, the years are two Integer");
+						int date1 = keyboard.nextInt();
+						int date2 = keyboard.nextInt();
 						Network.yearsPeople(date1, date2);
 						break;
 					case 4 :
@@ -278,10 +317,56 @@ public class Network {
 						
 					}
 					break;
-				case 5:
-					number = -1;
-					//metodos de la clase LogOut
-					break;
+				case 5 :
+					Graph graph = new Graph(8,19, "C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\graph8.txt", "C:\\Users\\Poxito\\Desktop\\2. Kurtsoa\\DSA\\graph88.txt","Jon232");
+					
+					System.out.println("Enter 1 if you want to find the shortest chain betwenn two users");
+					System.out.println("Enter 2 if you want to find the largest chain between two users");
+					System.out.println("Enter 3 if you want to know which groups have at least four members");
+				
+					int x = keyboard.nextInt();
+					switch(x) {
+					case 1:
+						//11
+						System.out.println("Enter the id of the first user");
+						String idUserBreadth = keyboard.next();
+						
+						System.out.println("Enter the id of the second user");
+						String idUserLastBreadth = keyboard.next();
+						
+						BreadthFirstSearch minChain = new BreadthFirstSearch(graph, graph.returnHashtableValue(idUserBreadth));//graphUsers,graph.returnHashtableValue(idUserLast)
+						
+						Stack<Integer> shortChain = new Stack<Integer>();
+						shortChain = minChain.pathTo(graph.returnHashtableValue(idUserLastBreadth));
+						
+						while(!shortChain.isEmpty()) {
+							System.out.println(shortChain.pop());
+						}
+						
+						break;
+					case 2:
+						//12 DepthFirstSearch
+						System.out.println("Enter the id of the first user");
+						String idUserDepth = keyboard.next();
+						System.out.println("Enter the id of the second user");
+						String idUser2Depth = keyboard.next();
+						
+						DepthFirstSearch maxChain = new DepthFirstSearch(graph, graph.returnHashtableValue(idUserDepth));
+						Stack<Integer> largeChain = new Stack<Integer>();
+						largeChain = maxChain.pathTo(graph.returnHashtableValue(idUser2Depth));
+						
+						while(!largeChain.isEmpty()) {
+							System.out.println(largeChain.pop());
+						}
+						
+						break;
+					case 3:
+						//13
+						
+						break;
+					default:
+						
+					}
 				default:	
 					
 				}

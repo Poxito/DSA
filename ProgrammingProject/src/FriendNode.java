@@ -1,48 +1,61 @@
 
-public class FriendNode<Friend> {
-	//private String element;
-	//private boolean isKey;
-	//private Friend valueKey;
-	//private TrieNode<Friend> firstChild;
-	//private TrieNode<Friend> nextSibling;
+public class FriendNode {
 	
-	//protected Friend parent;
-	protected FriendNode<Friend> firstChild, siblings;
-	protected String info;
+	protected String film;
+	protected String users;
+	protected FriendNode firstChild, siblings;
+	
 	
 	public FriendNode(){
-		this.info=" ";
-		firstChild=null;
-		siblings=null;
+		this.film = "";
+		this.users = "";
+		firstChild = null;
+		siblings = null;
 	}
 	
-	public FriendNode(String something){
-		this.info = something;
-		firstChild=null;
-		siblings=null;
+	public FriendNode(String film){
+		this.film = film;
+		this.users = "";
+		firstChild = null;
+		siblings = null;
 	}
 	
-	public FriendNode<Friend> getFirstChild(){
+	public FriendNode(String profile, String user){
+		this.film = profile;
+		this.users = user;
+		firstChild = null;
+		siblings = null;
+	}
+	
+	public FriendNode getFirstChild(){
 		return this.firstChild;
 	}
 	
-	public FriendNode<Friend> getSiblings(){
+	public FriendNode getSiblings(){
 		return this.siblings;
 	}
 	
-	public void setFirstChild(FriendNode<Friend> node) {
+	public void setFirstChild(FriendNode node) {
 		this.firstChild = node;
 	}
 	
-	public void setSiblings(FriendNode<Friend> node) {
+	public void setSiblings(FriendNode node) {
 		this.siblings = node;
 	}
 	
-	public String getInfo() {
-		return info;
+	public String getFilm() {
+		return film;
 	}
 	
-	public void setInfo(String info) {
-		this.info=info;
+	public void setFilm(String info) {
+		this.film=info;
+	}
+	
+	public String getUsers() {
+		return users;
+	}
+	
+	public void setUsers(String user) {
+		this.users = this.users + user;
 	}
 }
